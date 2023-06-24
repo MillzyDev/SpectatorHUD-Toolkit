@@ -30,6 +30,7 @@ namespace SpectatorHUD.Toolkit
                 ? AssetDatabase.GetAssetPath(parentObj)
                 : AssetDatabase.GetAssetPath(target);
             _manifestPath = Path.Combine(Path.GetDirectoryName(_hudAssetPath)!, "manifest.json");
+            Debug.Log(_manifestPath);
             string json = File.ReadAllText(_manifestPath);
             _manifest = JsonConvert.DeserializeObject<HudManifest>(json);
             
