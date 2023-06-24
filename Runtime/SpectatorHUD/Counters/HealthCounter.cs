@@ -1,13 +1,10 @@
 using System.Globalization;
 using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 namespace SpectatorHUD.Counters
 {
-    public class HealthCounter : HealthCounterBase
+    public class HealthCounter : MonoBehaviour
     {
-        protected override void UpdateCounter()
-        {
-            text.SetText(Value.ToString(CultureInfo.CurrentCulture));
-        }
     }
 }

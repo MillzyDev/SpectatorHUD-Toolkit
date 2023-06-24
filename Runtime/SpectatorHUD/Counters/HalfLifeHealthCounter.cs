@@ -1,13 +1,10 @@
 using System;
+using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 namespace SpectatorHUD.Counters
 {
-    public class HalfLifeHealthCounter : HealthCounterBase
+    public class HalfLifeHealthCounter : MonoBehaviour
     {
-        protected override void UpdateCounter()
-        {
-            var value = (int)Math.Round((decimal)Value*10, 0);
-            text.SetText(value.ToString());
-        }
     }
 }
