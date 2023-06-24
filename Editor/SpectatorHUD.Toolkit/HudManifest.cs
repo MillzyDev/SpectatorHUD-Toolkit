@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR
 using Newtonsoft.Json;
 
+// ReSharper disable once CheckNamespace
 namespace SpectatorHUD.Toolkit
 {
     public class HudManifest

@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 using WebSocketSharp;
 using Object = UnityEngine.Object;
 
+// ReSharper disable once CheckNamespace
 namespace SpectatorHUD.Toolkit
 {
     public class NewHud : EditorWindow
@@ -105,8 +106,11 @@ namespace SpectatorHUD.Toolkit
 
             string prefabPath = AssetDatabase.GetAssetPath(_templateInput.value);
             string prefabFilename = Path.GetFileName(prefabPath);
-            string newPrefabPath = Path.Combine(fullPath, prefabFilename);
+            string newPrefabPath = Path.Combine(fullPath, $"{hudName}.prefab");
             File.Copy(prefabPath, newPrefabPath);
+            
+            Object clonePrefab = Resources.Load(newPrefabPath);
+            clonePrefab.name = hudName;
 
             var manifest = new HudManifest
             {
@@ -119,8 +123,10 @@ namespace SpectatorHUD.Toolkit
             File.WriteAllText(Path.Combine(fullPath, "manifest.json"), jsonString);
 
             if (_addToSceneInput.value)
-                Instantiate(_templateInput.value);
-
+            {
+                Instantiate(clonePrefab);
+            }
+            
             EditorUtility.RevealInFinder(newPrefabPath);
 
             Close();

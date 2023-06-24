@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// ReSharper disable once CheckNamespace
 namespace SpectatorHUD.Toolkit
 {
     [CustomEditor(typeof(HudRoot))]
@@ -29,6 +30,7 @@ namespace SpectatorHUD.Toolkit
             _hudAssetPath = parentObj != null
                 ? AssetDatabase.GetAssetPath(parentObj)
                 : AssetDatabase.GetAssetPath(target);
+            Debug.Log(_hudAssetPath);
             _manifestPath = Path.Combine(Path.GetDirectoryName(_hudAssetPath)!, "manifest.json");
             Debug.Log(_manifestPath);
             string json = File.ReadAllText(_manifestPath);
