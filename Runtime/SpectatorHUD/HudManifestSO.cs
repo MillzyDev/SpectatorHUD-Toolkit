@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
 namespace SpectatorHUD
 {
     // ReSharper disable once InconsistentNaming
+    [CreateAssetMenu(menuName = "SpectatorHUD/Manifest Asset", fileName = "Manifest")]
     public class HudManifestSO : ScriptableObject
     {
         [InspectorName("Name")]

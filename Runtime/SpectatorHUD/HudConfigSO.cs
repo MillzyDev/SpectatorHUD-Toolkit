@@ -4,6 +4,7 @@
 namespace SpectatorHUD
 {
     // ReSharper disable once InconsistentNaming
+    [CreateAssetMenu(menuName = "SpectatorHUD/Config Asset", fileName = "Config")]
     public class HudConfigSO : ScriptableObject
     {
         public CombinedAmmoCounterConfig combinedAmmoCounterConfiguration;
