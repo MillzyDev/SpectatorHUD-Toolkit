@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:GroupBox name="content">
+        <ui:Label text="Export HUD" display-tooltip-when-elided="true" style="font-size: 13px; -unity-font-style: bold;" />
+        <ui:GroupBox />
+        <ui:TextField picking-mode="Ignore" label="Name" readonly="true" name="displayName" />
+        <ui:TextField picking-mode="Ignore" label="Author" readonly="true" name="displayAuthor" />
+        <ui:TextField picking-mode="Ignore" label="Version" readonly="true" name="displayVersion" />
+        <ui:TextField picking-mode="Ignore" label="Description" multiline="true" readonly="true" name="displayDescription" style="flex-wrap: wrap; height: 60px;" />
+        <ui:GroupBox />
+        <ui:Button text="Export" display-tooltip-when-elided="true" name="exportButton" />
+    </ui:GroupBox>
+</ui:UXML>
