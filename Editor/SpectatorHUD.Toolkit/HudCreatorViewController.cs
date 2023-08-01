@@ -14,17 +14,15 @@ namespace SpectatorHUD.Toolkit
         private TextField _hudName;
         private TextField _hudAuthor;
         private TextField _hudDescription;
-
         private Toggle _createConfigToggle;
         private Button _createButton;
-
         private Label _errorMessage;
 
-        [MenuItem("SpectatorHUD/Create New HUD")]
+        [MenuItem("SpectatorHUD/Create New HUD", priority = 1)]
         public static void ShowExample()
         {
             var wnd = GetWindow<HudCreatorViewController>();
-            wnd.titleContent = new GUIContent("HudCreatorViewController");
+            wnd.titleContent = new GUIContent("HUD Creation Wizard");
         }
 
         public void CreateGUI()
@@ -35,10 +33,9 @@ namespace SpectatorHUD.Toolkit
             VisualElement root = rootVisualElement;
 
             // Import UXML
-            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
-                "Assets/dev.millzy.spectatorhud.toolkit/Editor/SpectatorHUD.Toolkit/HudCreatorView.uxml");
-            VisualElement labelFromUxml = visualTree.Instantiate();
-            root.Add(labelFromUxml);
+            var visualTree = Resources.Load<VisualTreeAsset>("Views/HudCreatorView");
+            VisualElement uxml = visualTree.Instantiate();
+            root.Add(uxml);
 
             #endregion
 
