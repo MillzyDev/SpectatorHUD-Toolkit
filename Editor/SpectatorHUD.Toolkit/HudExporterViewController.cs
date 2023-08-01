@@ -1,10 +1,13 @@
+using System;
+using System.IO;
+using System.Net.Mime;
 using SpectatorHUD;
 using SpectatorHUD.Toolkit;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using Object = UnityEngine.Object;
 
 // ReSharper disable once CheckNamespace
 public class HudExporterViewController : EditorWindow
@@ -49,6 +52,9 @@ public class HudExporterViewController : EditorWindow
         };
         _hudPackage.RegisterCallback<ChangeEvent<Object>>(OnHudPackageChanged);
         contentBox.Insert(1 ,_hudPackage);
+
+        _exportButton = root.Q<Button>("exportButton");
+        _exportButton.clicked += ExportHud;
     }
 
     private void OnHudPackageChanged(ChangeEvent<Object> changeEvent)
@@ -70,5 +76,41 @@ public class HudExporterViewController : EditorWindow
         _displayAuthor.value = hudManifest.author;
         _displayVersion.value = hudManifest.version.ToString();
         _displayDescription.value = hudManifest.description;
+    }
+
+    private void ExportHud()
+    {
+        _exportButton.focusable = false;
+
+        var hudPackage = _hudPackage.value as HudPackageSO;
+        HudManifestSO hudManifest = hudPackage!.hudManifest;
+        string hudName = hudManifest.hudName;
+
+        string filePath =
+            EditorUtility.SaveFilePanel("Export HUD", "", hudName + ".hud", "hud");
+
+        HudConfigSO hudConfig = hudPackage.hudConfig;
+        GameObject hudObject = hudPackage.hudObject;
+
+        string manifestPath = AssetDatabase.GetAssetPath(hudManifest);
+        string configPath = AssetDatabase.GetAssetPath(hudConfig);
+        string prefabPath = AssetDatabase.GetAssetPath(hudObject);
+
+        var bundle = new AssetBundleBuild
+        {
+            assetBundleName = Path.GetFileName(filePath),
+            assetNames = new[] { manifestPath, configPath, prefabPath }
+        };
+
+        Directory.CreateDirectory(Path.Combine(Application.dataPath, "_SH Build"));
+
+        BuildPipeline.BuildAssetBundles("Assets/_SH Build", new[] { bundle }, BuildAssetBundleOptions.None,
+            BuildTarget.StandaloneWindows64);
+        
+        File.Copy(Path.Combine(Application.dataPath, "_SH Build", $"{hudName.ToLower()}.hud"), filePath, true);
+        
+        EditorUtility.RevealInFinder(filePath);
+        
+        Close();
     }
 }
