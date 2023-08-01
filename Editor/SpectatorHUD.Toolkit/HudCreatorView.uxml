@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:GroupBox style="width: auto;">
+        <ui:Label text="Create New HUD" display-tooltip-when-elided="true" style="font-size: 13px; -unity-font-style: bold;" />
+        <ui:TextField picking-mode="Ignore" label="HUD Name" max-length="0" is-delayed="false" multiline="false" name="hudName" />
+        <ui:TextField picking-mode="Ignore" label="Author" name="hudAuthor" />
+        <ui:TextField picking-mode="Ignore" label="Description" multiline="true" name="hudDescription" style="height: 50px;" />
+        <ui:GroupBox />
+        <ui:Toggle label="Create Custom Config" name="createConfig" />
+        <ui:GroupBox />
+        <ui:Button text="Create HUD" display-tooltip-when-elided="true" />
+    </ui:GroupBox>
+</ui:UXML>
