@@ -53,6 +53,8 @@ namespace SpectatorHUD.Toolkit
 
         private void CreateNewHud()
         {
+            _createButton.focusable = false;
+            
             if (!ValidateInputFields(out string message))
             {
                 _errorMessage.text = message;
